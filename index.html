@@ -7,19 +7,56 @@
     <link rel="stylesheet" href="./stylesheet.css">
 </head>
 <body>
+
+    <!--Navbar-->
     <nav class="navbar">
         <h1>Weather Dashboard</h1>
     </nav>
-    <h2>Weather Data</h2>
-    <div id="weather-info">
-        <p>City: <span id="city"></span></p>
-        <p>State: <span id="state"></span></p>
-        <p>Temperature: <span id="temperature"></span></p>
-        <p>Condition: <span id="condition"></span></p>
+
+<!--Main card-->
+<h2 id="header-main-card">Weather in BLANK</h2>
+
+    <div id="today-weather"></div>
+    <div class="main-card">
+        <div class="cards-container">
+            <p>trial card</p>
+            <p>random stuff</p>
+            <p>filler</p>
+        </div><br>
     </div>
+
+<!--Side Panel-->
+<aside id="weather-container">
     <h2>Search for City:</h2>
-    <input type="text" id="search-input" placeholder="Enter city name">
-    <button id="search-btn">Search</button>
+        <input type="text" id="city" placeholder="Enter City"><br>
+        <button onclick="getWeather()">Search</button>
+    </aside>
+
+    <!--Weather Data Backend-->
+    <div class="Weather-data">
+        <img id="weather-icon" alt="Weather Icon">
+        <div id="temperture"></div>
+        <div id="weather-info"></div>
+        <div id="hourly-weather"></div>
+    </div>
+
+    <!--Weather Forecast 5 day cards-->
+    <div class="forecast">
+        <h2 id="weekly">Weekly Forecast</h2>
+
+        <div class="forecast-cards">
+            <ul>
+                <li class="card">
+                    <h4 id="date">A</h4>
+                    <div class="icons"></div>
+                    <h5 id="temp">B</h5>
+                    <h5 id="wind">C</h5>
+                    <h5 id="humidity">D</h5>
+                </li>
+            </ul>
+        </div>
+    </div>
+
 <script src="./script.js"></script>
 </body>
 </html>

@@ -1,10 +1,58 @@
 .navbar {
   background-color: blue;
-  color: #fff;
-  padding: 10px;
+  color: #b7f4ff;
+  padding: 2px;
   text-align: center;
   background: linear-gradient(to right, rgb(113, 191, 218), rgb(2, 2, 132));
-  height: 20x;
-  font-size: 20px;
+  height: 150px;
+  font-size: 50px;
   font-family: Arial, Helvetica, sans-serif;
+  margin-top: 0px;
 }
+
+button {
+  background-color: rgb(93, 106, 224);
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 25px;
+  font-weight: 100px;
+  color: white;
+  border-radius: 20px;
+  width: 200px;
+  text-align: center;
+}
+
+#city {
+height: 30px;
+border-color: blue;
+margin: 10px;
+background-color: rgb(170, 231, 231);
+color: #09373f;
+}
+
+.main-card {
+  border-style: solid;
+  border-color: blue;
+  border-width: 5px;
+  width: 70%;
+  margin-left: 20%;
+  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  margin-top: 5%;
+}
+
+html {
+  background-color: rgb(184, 219, 230);
+}
+
+.forecast-cards {
+  border-width: 5px;
+  border-color: blue;
+  border-style: solid;
+  width: 15%;
+}
+
+#weekly {
+  text-align: center;
+  font-size: 40px;
+}
+
