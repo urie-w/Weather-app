@@ -16,7 +16,31 @@ const wind = document.querySelector("#wind");
 const humidity = document.querySelector("#humidity");
 const firstIcon = document.querySelector("#first-icon");
 const date = document.querySelector("#date");
+
 //Get weather data from API
 function getCurrentWeather () {
-    fetch(`https://rapidapi.com/worldapi/api/open-weather13/playground/apiendpoint_d15cd885-e8e5-49e7-b94b-588c41687aa1`);
-}
+    fetch(`https://${API_Host}/open-weather13?city=${cityInput.value}`, {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': API_Key,
+            'X-RapidAPI-Host': API_Host
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(err => console.log(err));
+    city.textContent = data.name;
+    temp.textContent = `Temp: ${data.main.temp}`;
+    wind.textContent = `Wind: ${data.wind.speed}`;
+    humidity.textContent = `Humidity: ${data.main.humidity}`;
+    data.textContent = dayjs(data.dt * 1000).format('MM/DD/YYYY');
+    const icon = document.createElement("img");
+    firstIcon.innerHTML = "";
+    firstIcon.appendChild(icon);
+    icon.alt = "Weather Icon";
+    icon.src = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+};
+
+//Function to get forecast data from api
