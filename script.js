@@ -60,13 +60,13 @@ function getCurrentWeather() {
 
 //Function to get forecast data from api
 function getForecast() {
-    let cityName = city.value;
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}`,
+    let cityName = cityInput.value.trim();
+    const forecastUrl =`http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}`;
 
-    )
+    fetch(forecastUrl)
     .then(res => res.json())
     .then(data => {
-        console.log('Forecast Data', data);
+        console.log('Forecast Data:', data);
    
         // Select data for 5 day forecast
         const selectData = [
@@ -77,7 +77,7 @@ function getForecast() {
             data.list[32],
         ];
 
-        console.log('Select Data', selectData);
+        // console.log('Select Data', selectData);
 
         // takes data from selectData and fills values in forecast cards
         for (let i = 0; i < selectData.length; i++) {
@@ -87,15 +87,18 @@ function getForecast() {
         const humidityElem = document.querySelector(`#humidity${i}`);
         const windElem = document.querySelector(`#wind${i}`);
 
+        //Update forecast date
         date.textContent = dayjs(selectData[i].dt * 1000).format('MM/DD/YYYY');
-        const icon = document.createElement("img");
-        iconElem.innerHTML = "";
-        iconElem.appendChild(icon);
-        icon.alt = "Weather Icon";
-        icon.src = `http://openweathermap.org/img/w/${selectData[i].weather[0].icon}.png`;
-        tempElem.textContent = `Temp: ${selectData[i].main.temp}`;
-        humidityElem.textContent = `Humidity: ${selectData[i].main.humidity}`;
-        windElem.textContent = `Wind: ${selectData[i].wind.speed}`;
+
+        //Update temp, wind, and humidity
+        // const icon = document.createElement("img");
+        // iconElem.innerHTML = "";
+        // iconElem.appendChild(icon);
+        // icon.alt = "Weather Icon";
+        // icon.src = `http://openweathermap.org/img/w/${selectData[i].weather[0].icon}.png`;
+        tempElem.textContent = `Temperature: ${selectData[i].main.temp}°F`;
+        humidityElem.textContent = `Humidity: ${selectData[i].main.humidity}%`;
+        windElem.textContent = `Wind: ${selectData[i].wind.speed}MPH`;
         }
     })
     .catch(err => console.log(err));
