@@ -1,62 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
     <link rel="stylesheet" href="./stylesheet.css">
 </head>
+
 <body>
 
     <!--Navbar-->
     <nav class="navbar">
         <h1>Weather Dashboard</h1>
     </nav>
+    <div>
+        <!--Side Panel-->
+        <aside id="weather-container">
+            <h2>Search for City:</h2>
+            <input type="text" id="city" placeholder="Enter City"><br>
+            <button onclick="getCurrentWeather()">Search</button>
 
-<!--Main card-->
-<h2 id="header-main-card">Weather in BLANK</h2>
+            <!--Search History-->
+            <div id="search-history"></div>
+        </aside>
 
-    <div id="today-weather"></div>
-    <div class="main-card">
-        <div class="cards-container">
-            <p>trial card</p>
-            <p>random stuff</p>
-            <p>filler</p>
-        </div><br>
+        <!--Weather Data-->
+        <main class="main-content">
+            <div class="current-weather">
+                <h2 id="header-main-card">Current Weather</h2>
+                <div id="weather-icon"></div>
+                <div id="temperture"></div>
+                <div id="wind"></div>
+                <div id="humidity"></div>
+            </div>
+
+            <!--Weather Forecast 5 day cards-->
+            <div class="forecast">
+                <h2 id="Weekly">5-Day Forecast:</h2>
+                <div class="forecast-cards-container">
+                    <ul>
+                        <!--Forecast Cards-->
+                        <li class="card" id="forecast-card0">
+                            <h4 id="date0">Date:</h4>
+                            <div id="icon0"></div>
+                            <h5 id="temp0">Temperature:</h5>
+                            <h5 id="wind0">Wind:</h5>
+                            <h5 id="humidity0">Humidity:</h5>
+                        </li>
+                        <li class="card" id="forecast-card1">
+                            <h4 id="date1">Date:</h4>
+                            <div id="icon1"></div>
+                            <h5 id="temp1">Temperature:</h5>
+                            <h5 id="wind1">Wind:</h5>
+                            <h5 id="humidity1">Humidity:</h5>
+                        </li>
+                        <li class="card" id="forecast-card2">
+                            <h4 id="date2">Date:</h4>
+                            <div id="icon2"></div>
+                            <h5 id="temp2">Temperature:</h5>
+                            <h5 id="wind2">Wind:</h5>
+                            <h5 id="humidity2">Humidity:</h5>
+                        </li>
+                        <li class="card" id="forecast-card3">
+                            <h4 id="date3">Date:</h4>
+                            <div id="icon3"></div>
+                            <h5 id="temp3">Temperature:</h5>
+                            <h5 id="wind3">Wind:</h5>
+                            <h5 id="humidity3">Humidity:</h5>
+                        </li>
+                        <li class="card" id="forecast-card4">
+                            <h4 id="date4">Date:</h4>
+                            <div id="icon4"></div>
+                            <h5 id="temp4">Temperature:</h5>
+                            <h5 id="wind4">Wind:</h5>
+                            <h5 id="humidity4">Humidity:</h5>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </main>
     </div>
 
-<!--Side Panel-->
-<aside id="weather-container">
-    <h2>Search for City:</h2>
-        <input type="text" id="city" placeholder="Enter City"><br>
-        <button onclick="getWeather()">Search</button>
-    </aside>
-
-    <!--Weather Data Backend-->
-    <div class="Weather-data">
-        <img id="weather-icon" alt="Weather Icon">
-        <div id="temperture"></div>
-        <div id="weather-info"></div>
-        <div id="hourly-weather"></div>
-    </div>
-
-    <!--Weather Forecast 5 day cards-->
-    <div class="forecast">
-        <h2 id="weekly">Weekly Forecast</h2>
-
-        <div class="forecast-cards">
-            <ul>
-                <li class="card">
-                    <h4 id="date">A</h4>
-                    <div class="icons"></div>
-                    <h5 id="temp">B</h5>
-                    <h5 id="wind">C</h5>
-                    <h5 id="humidity">D</h5>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-<script src="./script.js"></script>
+    <script src="./script.js"></script>
 </body>
+
 </html>
