@@ -21,8 +21,6 @@ const firstIcon = document.querySelector("#first-icon");
 const date = document.querySelector("#date");
 
 //Get weather data from API
-// const currentUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey
-
 const url = 'https://open-weather13.p.rapidapi.com/city/landon/EN';
 const options = {
     method: 'GET',
@@ -37,27 +35,12 @@ function getCurrentWeather() {
     let cityName = city.value
     console.log("City Name:", cityName);
     const currentUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
-    /*
-    try {
-        const response = await fetch(url, options);
-        const result = await response.text();
-        console.log(result);
-    } catch (error) {
-        console.error(error);
-    }
-*/
-    // --> Using PROMISED BASED fetch method
-  //  fetch(url, options) 
+
     fetch(currentUrl) 
         .then(res => res.json())
         .then(data => {
             console.log('Current Weather Data:', data);
-           /*
-            if(data.cod !== '200') {
-                alert('City not found');
-                return;
-            }
-            */
+          
             city.textContent = data.name;
             temp.textContent = `Temp: ${data.main.temp}`;
           //  tempTxt.textContent = `Temp: ${data.main.temp}`;
@@ -79,23 +62,12 @@ function getCurrentWeather() {
 function getForecast() {
     let cityName = city.value;
     fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}`,
-/*   {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Key': API_Key,
-            'X-RapidAPI-Host': API_Host
-        }
-    } */
+
     )
     .then(res => res.json())
     .then(data => {
         console.log('Forecast Data', data);
-        /*
-        if( data.cod !== '200') {
-            alert('Forecast not found');
-            return;
-        }
-            */
+   
         // Select data for 5 day forecast
         const selectData = [
             data.list[0],
@@ -129,36 +101,75 @@ function getForecast() {
     .catch(err => console.log(err));
 }
 
-//Event listener for search
-searchButton.addEventListener('click', function () {
-    getCurrentWeather();
-    getForecast();
-});
+// Store and load search history
+function saveCityHistory(cityName) {
+    const cities = JSON.parse(localStorage.getItem('cities')) || [];
 
-//Event listener for search history
-const cities = JSON.parse(localStorage.getItem('city')) || [];
-cities.push(cityInput.value);
-localStorage.setItem('city', JSON.stringify(cities));
-loadSearchHistory();
+    // No duplicates
+    if (!cities.includes(cityName)) {
+        cities.push(cityName);
+        localStorage.setItem('cities', JSON.stringify(cities));
+        loadSearchHistory();
+    }
+}
 
-//Display search history
-function loadSearchHistory () {
- const savedCities = JSON.parse(localStorage.getItem('city')) || [];
- searchHistory.innerHTML = "";
+// Load saved cities and make buttons
+function loadSearchHistory() {
+    const savedCities = JSON.parse(localStorage.getItem('cities')) || [];
 
- for (let i = 0; i < savedCities.length; i++) {
+    searchHistory.innerHTML = "";
+
+// Creates buttons for each city
+for (let i = 0; i < savedCities.length; i++) {
     let cityBtn = document.createElement("button");
     cityBtn.textContent = savedCities[i];
-    cityBtn.addEventListener("click", function(event) {
-        console.log(event.target.textContent);
+  cityBtn.classList.add("history-btn");
+
+  //Add event listener to handle the click
+  cityBtn.addEventListener("click", function(event) {
         cityInput.value = event.target.textContent;
         getCurrentWeather();
         getForecast();
     });
+
     searchHistory.appendChild(cityBtn);
-    }
 }
+}
+//Event listener for search
+searchButton.addEventListener('click', function () {
+    const cityName = cityInput.value.trim();
+
+    // Proceed if input isn't empty
+    if (cityName) {
+        saveCityHistory(cityName);
+        getCurrentWeather();
+        getForecast();
+    }
+});
+
+// //Event listener for search history
+// const cities = JSON.parse(localStorage.getItem('city')) || [];
+// cities.push(cityInput.value);
+// localStorage.setItem('city', JSON.stringify(cities));
+// loadSearchHistory();
+
+// //Display search history
+// function loadSearchHistory () {
+//  const savedCities = JSON.parse(localStorage.getItem('city')) || [];
+//  searchHistory.innerHTML = "";
+
+//  for (let i = 0; i < savedCities.length; i++) {
+//     let cityBtn = document.createElement("button");
+//     cityBtn.textContent = savedCities[i];
+//     cityBtn.addEventListener("click", function(event) {
+//         console.log(event.target.textContent);
+//         cityInput.value = event.target.textContent;
+//         getCurrentWeather();
+//         getForecast();
+//     });
+//     searchHistory.appendChild(cityBtn);
+//     }
+// }
 
 //load search history
 loadSearchHistory();
-
